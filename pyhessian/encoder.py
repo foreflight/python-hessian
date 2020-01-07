@@ -33,6 +33,12 @@ RETURN_TYPES = {
     dict: 'map',
 }
 
+def to_bytes(s):
+    try:
+        return s.encode('utf-8')
+    except:
+        return
+
 
 class bound_function_wrapper(object):
 
@@ -254,7 +260,9 @@ class Encoder(object):
         return pack('>2cl', b'V', b'l', len(obj)) + encoded + b'z'
 
     def encode_keyval(self, pair):
-        return self.encode(pair[0]) + self.encode(pair[1])
+        a = to_bytes(self.encode(pair[0]))
+        b = to_bytes(self.encode(pair[1]))
+        return a + b
 
     @encoder_for(dict)
     def encode_map(self, obj):
