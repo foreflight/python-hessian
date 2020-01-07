@@ -37,7 +37,7 @@ def to_bytes(s):
     try:
         return s.encode('utf-8')
     except:
-        return
+        return s
 
 
 class bound_function_wrapper(object):
